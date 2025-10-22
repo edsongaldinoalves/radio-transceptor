@@ -1,8 +1,12 @@
 // Botão A envia mensagem padrão codificada
 input.onButtonPressed(Button.A, function () {
-    mensagem = codificar("Olá do A")
+    datalogger.log(
+    datalogger.createCV("dados1", 0),
+    datalogger.createCV("dados2", 0)
+    )
+    mensagem = codificar("Olá do Amigo")
     radio.sendString(mensagem)
-    basic.showString("TX A")
+    basic.showString("TX Amigo")
 })
 // Recepção e resposta automática
 radio.onReceivedString(function (received) {
@@ -16,7 +20,7 @@ radio.onReceivedString(function (received) {
     }
 })
 // Função de decodificação
-function decodificar(msg: string) {
+function decodificar (msg: string) {
     for (let j = 0; j <= msg.length - 1; j++) {
         letra2 = msg.charCodeAt(j)
         resultado2 = "" + resultado2 + String.fromCharCode(letra2 - 3)
@@ -24,7 +28,7 @@ function decodificar(msg: string) {
     return resultado2
 }
 // Função de codificação simples (Cifra de César)
-function codificar(msg: string) {
+function codificar (msg: string) {
     for (let i = 0; i <= msg.length - 1; i++) {
         letra = msg.charCodeAt(i)
         // Desloca 3 posições
@@ -34,6 +38,10 @@ function codificar(msg: string) {
 }
 // Botão B envia mensagem alternativa codificada
 input.onButtonPressed(Button.B, function () {
+    datalogger.log(
+    datalogger.createCV("dados2", 0),
+    datalogger.createCV("dados1", 0)
+    )
     mensagem2 = codificar("Mensagem B")
     radio.sendString(mensagem2)
     basic.showString("TX B")
